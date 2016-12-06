@@ -1,0 +1,25 @@
+buildscript {
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.4.2.RELEASE")
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.palantir.docker' version'0.9.1'
+}
+apply plugin: 'org.springframework.boot'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web")
+}
+
+docker {
+    name 'thirstybear/gradle-docker'
+    tags 'latest'
+    dependsOn tasks.build
+}
